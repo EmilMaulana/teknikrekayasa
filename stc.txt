@@ -1,0 +1,1 @@
+php artisan migrate --path=/database/migrations/2024_09_21_023850_create_blogs_table.php migrate satu tabel
