@@ -4,50 +4,53 @@
             <section class="bg-white dark:bg-gray-900">
                 <div class="py-8 px-4 mx-auto">
                     <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new article</h2>
-                    <form>
+                    <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="w-full">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Title</label>
-                            <input wire:model="title" class="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type title">
-                            @error('title') 
-                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Oh, snapp!</span> Some error message.</p>    
+                            <input wire:model="title" name="title" value="{{ old('title') }}" class="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type title">
+                            @error('title')
+                                <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                </div>
                             @enderror
                         </div>
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 mt-5">
                             <div>
                                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                                <select wire:model="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <select wire:model="category" name="category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option selected="">Select category</option>
-                                    <option value="TV">TV/Monitors</option>
+                                    @foreach ($category_id as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
                                 </select>
-                            </div>
-                            <div class="flex flex-col justify-center">
-                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="default_size">Image</label>
-                                <input wire:model="image" name="image" id="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file">
-                                @error('image')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Oh, snapp!</span> Some error message.</p>
-                                @enderror
-                            
-                                <div class="mt-4">
-                                    @if ($image)
-                                        <img src="{{ $image->temporaryUrl() }}" alt="Preview Image" class="w-full max-h-96 object-contain">
-                                    @endif
+                                @error('category_id')
+                                <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <span class="font-medium">Oh, snapp!</span> {{ $message }}
                                 </div>
+                            @enderror
                             </div>
-                            {{-- <div class="">
+                            <div class="">
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="default_size">Image</label>
-                                <input wire:model="image" name="image" id="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file">
-                                @error('image') 
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">Oh, snapp!</span> Some error message.</p>    
+                                <input wire:model="image" name="image" value="{{ old('image') }}" id="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file">
+                                @error('image')
+                                    <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                        <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                    </div>
                                 @enderror
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="mt-5">
                             <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
-                            <textarea wire:model="body" id="myeditor" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Leave a comment..."></textarea>
+                            <textarea wire:model="body" name="body" id="myeditor" rows="4" class="" placeholder="Leave a comment...">{{ old('body') }}</textarea>
+                            @error('body')
+                                <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="mt-10">
-                            <button type="submit" wire:click="store()" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                            <button type="submit" wire:click="" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                                 SUBMIT
                             </button>
                         </div>

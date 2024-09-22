@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>{{ $title }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -59,7 +59,7 @@
                         @if (Route::has('login'))
                         @auth
                         <li>
-                            <a href="{{ url('/dashboard') }}"
+                            <a href="{{ route('dashboard') }}"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 mt-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"><i class="fa-solid fa-cubes me-1"></i> Dashboard </a>
                         </li>
                         @else
@@ -87,9 +87,7 @@
 
     <!-- Main Content -->
     <main class="mt-10 pt-9">
-        <div class="">
-            @yield('content')
-        </div>
+        @yield('content')
     </main>
 
 

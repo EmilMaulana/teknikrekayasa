@@ -76,230 +76,34 @@
         </div>
         <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-4 xl:grid-cols-4">
             {{-- card --}}
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
+            @foreach ($blogs as $item)
+                <a href="{{ route('front.post', $item->slug) }}">
+                    <div class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                        <div class="">
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->category->name }}" class="rounded-lg">
                         </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
+                        <div class="pt-4">
+                            <div class="mb-4 flex items-center text-white justify-between gap-4">
+                                <span
+                                    class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">{{ $item->category->name }}</span>
+                                <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
+                            </div>
+                            <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
+                                {{ $item->title }}
+                            </h4>
                         </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
+                        <div class="flex items-center space-x-4 my-5">
+                            <img class="w-7 h-7 rounded-full"
+                                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                                alt="Bonnie Green avatar" />
+                            <span class="font-medium dark:text-white">
+                                {{ $item->user->name }}
+                            </span>
+                            <span class="text-sm text-white">{{ $item->created_at->diffForHumans() }}</span>
                         </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
                     </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
-                        </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
-                        </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
-                        </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
-                        </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div
-                    class="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                    <div class="">
-                        <img src="https://santrikoding.com/storage/posts/4d35e17d-1865-4eab-887c-7b5fed66529a.webp"
-                            alt="" class="rounded-lg">
-                    </div>
-                    <div class="pt-4">
-                        <div class="mb-4 flex items-center text-white justify-between gap-4">
-                            <span
-                                class=" text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-white">Categories</span>
-                            <span class="text-sm"><i class="fas fa-eye"></i> 300</span>
-                        </div>
-                        <h4 class="text-lg font-semibold leading-tight text-gray-900 dark:text-white">
-                            Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
-                        </h4>
-                    </div>
-                    <div class="flex items-center space-x-4 my-5">
-                        <img class="w-7 h-7 rounded-full"
-                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                            alt="Bonnie Green avatar" />
-                        <span class="font-medium dark:text-white">
-                            Bonnie Green
-                        </span>
-                        <span class="text-sm text-white">14 days ago</span>
-                    </div>
-                </div>
-            </a>
+                </a>
+            @endforeach
         </div>
 
         <div class="w-full text-center pt-5">

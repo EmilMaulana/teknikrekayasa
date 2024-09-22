@@ -8,11 +8,11 @@ use App\Models\Blogs;
 class Index extends Component
 {
     public $blogs;
-    public $title = 'EMIL MAULANA';
+    public $title ;
     public $slug;
     public $category;
     public $image;
-    public $body = 'INI BODY';
+    public $body;
 
     public function mount()
     {

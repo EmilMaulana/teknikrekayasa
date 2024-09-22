@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\FrontController;
+use App\Livewire\Blogs\Create;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +16,11 @@ use App\Http\Controllers\BlogsController;
 |
 */
 
-Route::get('/', function () {
-    return view('front.coba');
-});
+// Route::get('/', function () {
+//     return view('front.index');
+// });
+
+
 
 Route::middleware([
     'auth:sanctum',
@@ -34,5 +38,9 @@ route::prefix('/dashboard')->group(function () {
     route::get('/blog/index', [BlogsController::class, 'index'])->name('blog.index');
     route::get('/blog/image/upload', [BlogsController::class, 'imageUpload'])->name('imageUpload');
     route::get('/blog/create', [BlogsController::class, 'create'])->name('blog.create');
+    route::post('/blog/store', [Create::class, 'store'])->name('blog.store');
     route::get('/blog/{id}/edit', [BlogsController::class, 'edit'])->name('blog.edit');
 });
+
+Route::get('/', [FrontController::class, 'index'])->name('front.index');
+Route::get('/{blogs:slug}', [FrontController::class, 'show'])->name('front.post');

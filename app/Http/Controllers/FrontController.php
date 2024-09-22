@@ -3,17 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Blogs;
 
-class BlogsController extends Controller
+class FrontController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.blogs.index', [
-            'title' => "LIST POST",
-        ]) ;
+        return view('front.index', [
+            'title' => 'TEKNIK REKAYASA | TUTORIAL PEMROGRAMAN WEB',
+            'blogs' => Blogs::latest()->paginate(6)
+        ]);
+    }
+
+    public function show($slug)
+    {   
+        $blog = Blogs::where('slug', $slug)->first();
+
+        // dd($blog);
+        return view('front.post', [
+            'title' => $blog->title,
+            'blog' => $blog
+        ]);
     }
 
     /**
@@ -21,9 +34,7 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        return view('dashboard.blogs.create', [
-            'title' => "CREATE POST",
-        ]) ;
+        //
     }
 
     /**
@@ -31,16 +42,13 @@ class BlogsController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -64,16 +72,5 @@ class BlogsController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function imageUpload(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
-        ]);
-
-        $path = $request->file('file')->store('images', 'public');
-
-        return response()->json(['location' => asset('storage/' . $path)]);
     }
 }

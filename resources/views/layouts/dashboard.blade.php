@@ -16,8 +16,9 @@
         <script src="https://kit.fontawesome.com/f1ecbb1f89.js" crossorigin="anonymous"></script>
         <script src="{{ asset('theme/js/charts-lines.js') }}" defer></script>
         <script src="{{ asset('theme/js/charts-pie.js') }}" defer></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('styles')
-        @livewireStyles()
+        @livewireStyles
     </head>
 <body>
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" class="{ 'overflow-hidden': isSideMenuOpen }">
@@ -313,18 +314,15 @@
                                 <span class="inline-flex rounded-md mr-2">
                                     <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </span>
-                            
                                 <!-- User Name -->
                                 <span class="inline-flex rounded-md">
                                     {{ Auth::user()->name }}
                                 </span>
                             </button>
-                            
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-white transition ease-in-out duration-150">
                                         {{ Auth::user()->name }}
-
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                         </svg>
@@ -338,25 +336,19 @@
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Manage Account') }}
                             </div>
-
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
-
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
                                 </x-dropdown-link>
                             @endif
-
                             <div class="border-t border-gray-200"></div>
-
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
-
-                                <x-dropdown-link href="{{ route('logout') }}"
-                                        @click.prevent="$root.submit();">
+                                <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
@@ -377,6 +369,7 @@
 
         </div>
         </div>
+        @stack('modals')
         @stack('scripts')
         @livewireScripts
         <script>

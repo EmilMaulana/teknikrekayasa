@@ -3,20 +3,24 @@
 namespace App\Livewire\Blogs;
 
 use App\Models\Blogs;
+use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Create extends Component
 {   
-    public $title = 'EMIL MAULANA';
+    public $title;
     public $slug;
-    public $category;
+    public $category_id;
+    public $user_id;
     public $image;
-    public $body = 'INI BODY';
+    public $body;
 
     public function mount()
     {
-        $this->slug = Str::slug($this->title);
+        $this->category_id = Category::all(); // Ambil semua data kelas
     }
 
     public function updatedTitle()
@@ -26,37 +30,35 @@ class Create extends Component
     public function render()
     {
         return view('livewire.blogs.create',[
-            'title' => $this->title,
-            'body' => $this->body,
+            'category' =>$this->category_id
         ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {   
-        $this->title = "ini judul";
-        $this->body = "ini body";
-        // $this->validate([
-        //     'title' => 'required|max:255',
-        //     'slug' => 'required|unique:blogs,slug|max:255',
-        //     'category' => 'required',
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'body' => 'required'
-        // ]);
+        $validatedData = $request->validate([
+            'title' => 'unique:blogs|required|max:255',
+            'category_id' => 'required',
+            'body' => 'required'
+        ]);
+        
+        
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
+        
+        $validatedData['slug'] = Str::slug($request->title);
+        $validatedData['user_id'] = Auth::user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 90);
+        
+        // dd($validatedData);
+        Blogs::create($validatedData);
 
-        // $imageName = time().'.'.$this->image->extension();
-        // $this->image->storeAs('blogs', $imageName);
+        session()->flash('message', 'Article created successfully.');
 
-        // Blogs::create([
-        //     'title' => $this->title,
-        //     'slug' => $this->slug,
-        //     'category' => $this->category,
-        //     'image' => 'posts/' . $imageName,
-        //     'body' => $this->body
-        // ]);
-
-        // session()->flash('message', 'Post created successfully.');
-
-        // return redirect()->route('posts.index');
+        return redirect()->route('blog.index');
         
     }
+
+
 }
