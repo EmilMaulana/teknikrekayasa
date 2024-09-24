@@ -8,9 +8,11 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {   
+    use WithFileUploads;
     public $title;
     public $slug;
     public $category_id;
@@ -23,10 +25,6 @@ class Create extends Component
         $this->category_id = Category::all(); // Ambil semua data kelas
     }
 
-    public function updatedTitle()
-    {
-        $this->slug = Str::slug($this->title);
-    }
     public function render()
     {
         return view('livewire.blogs.create',[
@@ -51,10 +49,10 @@ class Create extends Component
         $validatedData['user_id'] = Auth::user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 90);
         
-        // dd($validatedData);
         Blogs::create($validatedData);
 
-        session()->flash('message', 'Article created successfully.');
+        
+        session()->flash('success', 'Article created successfully.');
 
         return redirect()->route('blog.index');
         

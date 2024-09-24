@@ -1,0 +1,74 @@
+<div>
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">      
+        <div class="w-full overflow-x-auto">
+            <section class="bg-white dark:bg-gray-900">
+                <div class="py-8 px-4 mx-auto">
+                    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update article</h2>
+                    <form method="POST" action="{{ route('blog.update', $blog->slug) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="w-full">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Title</label>
+                            <input name="title" value="{{ $title }}" class="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type title">
+                            @error('title')
+                                <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 mt-5">
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                <select name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option selected="" value="{{ $blog->category->id }}">{{ $blog->category->name }}</option>
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                </div>
+                            @enderror
+                            </div>
+                            <div class="mb-4">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="default_size">Image</label>
+                                <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="default_size" type="file">
+                                <!-- Preview Image jika ada file baru diupload -->
+                                @if ($image instanceof \Livewire\TemporaryUploadedFile)
+                                    <div class="mt-2">
+                                        <img src="{{ $image->temporaryUrl() }}" alt="Preview Image" class="w-40 h-40 object-cover">
+                                    </div>
+                                @elseif ($blog->image)
+                                    <!-- Preview image dari database -->
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . $blog->image) }}" alt="Current Image" class="w-80 object-cover rounded-lg">
+                                    </div>
+                                @endif
+                                @error('image')
+                                    <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                        <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>                            
+                        </div>
+                        <div class="mt-5">
+                            <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                            <textarea name="body" id="myeditor" rows="7" class="" placeholder="Leave a comment...">{{ old('body', $body) }}</textarea>
+                            @error('body')
+                                <div class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <span class="font-medium">Oh, snapp!</span> {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="mt-10">
+                            <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                                SUBMIT
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+

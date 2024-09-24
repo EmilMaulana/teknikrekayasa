@@ -9,21 +9,21 @@
         <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <script src="{{ asset('theme/js/init-alpine.js') }}"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"/>
+        <script src="https://kit.fontawesome.com/f1ecbb1f89.js" crossorigin="anonymous"></script>
+        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"/> --}}
         <script src="https://cdn.tiny.cloud/1/eiibxwhbi25o5zza3m92qtf0o5jjazd6vuwtj6wsek9mfglc/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
         <script src="https://kit.fontawesome.com/f1ecbb1f89.js" crossorigin="anonymous"></script>
         <script src="{{ asset('theme/js/charts-lines.js') }}" defer></script>
         <script src="{{ asset('theme/js/charts-pie.js') }}" defer></script>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         @stack('styles')
         @livewireStyles
     </head>
 <body>
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
-        <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+        <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0 shadow-xl">
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
                     Windmill
@@ -50,7 +50,7 @@
                 </ul>
                 <ul>
                     <li class="relative px-6 py-3">
-                        <span class="{{ request()->routeIs('blog.index', 'blog.create') ? 'absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg' : '' }} " aria-hidden="true"></span>
+                        <span class="{{ request()->routeIs('blog.index', 'blog.create', 'blog.edit') ? 'absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg' : '' }} " aria-hidden="true"></span>
                         <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100" href="{{ route('blog.index') }}">
                             <svg
                             class="w-5 h-5"
@@ -346,12 +346,16 @@
                             @endif
                             <div class="border-t border-gray-200"></div>
                             <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}" x-data>
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                <button type="submit" class="block w-full px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">Logout</button>
+                            </form>
+                            {{-- <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+                                <x-dropdown-link href="{{ route('logout') }}">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
-                            </form>
+                            </form> --}}
                         </x-slot>
                     </x-dropdown>
                 </li>
@@ -369,7 +373,6 @@
 
         </div>
         </div>
-        @stack('modals')
         @stack('scripts')
         @livewireScripts
         <script>

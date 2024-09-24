@@ -4,23 +4,33 @@ namespace App\Livewire\Blogs;
 
 use Livewire\Component;
 use App\Models\Blogs;
-
+use Livewire\WithPagination;
 class Index extends Component
 {
     public $blogs;
-    public $title ;
-    public $slug;
-    public $category;
-    public $image;
-    public $body;
+    public $query;
+    public $search = '';
+    use WithPagination;
 
-    public function mount()
+    public function updatingSearch()
     {
-        $this->blogs = Blogs::all(); // Mengambil semua blog post
+        $this->resetPage(); // Reset ke halaman 1 ketika pencarian berubah
     }
 
     public function render()
-    {
-        return view('livewire.blogs.index');
+    {      
+        $query = Blogs::query();
+
+        if (!empty($this->search)) {
+            $query->where('title', 'like', '%' . $this->search . '%')
+                ->orWhere('body', 'like', '%' . $this->search . '%');
+        }
+
+        $blogs = $query->latest()->paginate(10);
+        // Blogs::where('title', 'like', '%' . $this->search . '%')->paginate(5)
+
+        return view('livewire.blogs.index',[
+            'blogss' => $blogs
+        ]);
     }
 }

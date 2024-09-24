@@ -22,6 +22,11 @@ class FrontController extends Controller
     {   
         $blog = Blogs::where('slug', $slug)->first();
 
+        if (!$blog) {
+            // Redirect ke halaman 404 jika blog tidak ditemukan
+            abort(404, 'Blog tidak ditemukan');
+        }
+
         // dd($blog);
         return view('front.post', [
             'title' => $blog->title,

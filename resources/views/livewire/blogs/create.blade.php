@@ -7,8 +7,8 @@
                     <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="w-full">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Title</label>
-                            <input wire:model="title" name="title" value="{{ old('title') }}" class="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type title">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Title</label>
+                            <input name="title" value="{{ old('title') }}" class="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type title">
                             @error('title')
                                 <div class="mt-2 text-xs text-red-600 dark:text-red-400">
                                     <span class="font-medium">Oh, snapp!</span> {{ $message }}
@@ -17,7 +17,7 @@
                         </div>
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 mt-5">
                             <div>
-                                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                                 <select wire:model="category" name="category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     <option selected="">Select category</option>
                                     @foreach ($category_id as $item)
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         <div class="mt-5">
-                            <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Body</label>
                             <textarea wire:model="body" name="body" id="myeditor" rows="4" class="" placeholder="Leave a comment...">{{ old('body') }}</textarea>
                             @error('body')
                                 <div class="mt-2 text-xs text-red-600 dark:text-red-400">

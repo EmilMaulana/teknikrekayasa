@@ -19,6 +19,7 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
+        "alpinejs": "^2.8.2",
         "ckeditor5": "^43.1.0",
         "froala-editor": "^4.2.2"
     }
