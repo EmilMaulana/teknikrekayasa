@@ -9,7 +9,11 @@ export default {
         "./vendor/laravel/jetstream/**/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
-        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./node_modules/flowbite/**/*.js",
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
     ],
 
     theme: {
@@ -20,5 +24,10 @@ export default {
         },
     },
 
-    plugins: [forms, typography, require("flowbite-typography")],
+    plugins: [
+        forms,
+        typography,
+        require("flowbite-typography"),
+        require("flowbite/plugin"),
+    ],
 };

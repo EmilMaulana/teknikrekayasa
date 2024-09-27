@@ -14,7 +14,7 @@ class FrontController extends Controller
     {
         return view('front.index', [
             'title' => 'TEKNIK REKAYASA | TUTORIAL PEMROGRAMAN WEB',
-            'blogs' => Blogs::latest()->paginate(6)
+            'blogs' => Blogs::latest()->paginate(8)
         ]);
     }
 

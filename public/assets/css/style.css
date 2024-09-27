@@ -2,35 +2,34 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-  }
-  
-  img {
+}
+
+img {
     max-width: 100%;
-  }
-  
-  .logo-container {
+}
+
+.logo-container {
     overflow: hidden;
     display: flex;
-  }
-  
-  .logo {
+}
+
+.logo {
     display: flex;
     flex-shrink: 0;
     gap: 10rem;
     padding: 1rem;
     animation: infinite-scroll 20s linear infinite;
-    
-  }
-  
-  .logo img {
+}
+
+.logo img {
     height: 5rem;
-  }
-  
-  @keyframes infinite-scroll {
+}
+
+@keyframes infinite-scroll {
     from {
-      transform: translateX(1);
+        transform: translateX(1);
     }
     to {
-      transform: translateX(-100%);
+        transform: translateX(-100%);
     }
-  }
+}

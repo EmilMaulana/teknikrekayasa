@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Route::get('/', function () {
-//     return view('front.index');
+//     return view('layouts.main');
 // });
 
 
@@ -51,7 +51,7 @@ route::prefix('/dashboard')->group(function () {
     route::post('/blog/store', [Create::class, 'store'])->name('blog.store');
     route::get('/blog/{blogs:slug}/edit', [BlogsController::class, 'edit'])->name('blog.edit');
     route::post('/blog/{blog:slug}/update', [BlogsController::class, 'update'])->name('blog.update');
-        
+    route::delete('/blog/{blog:slug}/delete', [BlogsController::class, 'destroy'])->name('blog.delete');
     // route::post('/blog/{blogs:slug}/update', [Edit::class, 'update'])->name('blog.update');
 });
 
